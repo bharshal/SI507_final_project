@@ -18,45 +18,45 @@ import re
 import requests
 import json
 
-# # four co-ords for annarbor border: topleft, topright, bottomleft, bottomright
-# tl = (42.31672728454659, -83.80731873113874)
-# tr = (42.31672728454659, -83.67290787670282)
-# bl = (42.23823420163313, -83.80731873113874)
-# br = (42.23823420163313, -83.67290787670282)
+# four co-ords for annarbor border: topleft, topright, bottomleft, bottomright
+tl = (42.31672728454659, -83.80731873113874)
+tr = (42.31672728454659, -83.67290787670282)
+bl = (42.23823420163313, -83.80731873113874)
+br = (42.23823420163313, -83.67290787670282)
 
-# # horizontal and vertical separation of the borders
-# horz_dist = tr[1] - tl[1]
-# vert_dist = tr[0] - br[0]
+# horizontal and vertical separation of the borders
+horz_dist = tr[1] - tl[1]
+vert_dist = tr[0] - br[0]
 
-# # divide the quadrilateral into 10x10 grid of co-ordinates
+# divide the quadrilateral into 10x10 grid of co-ordinates
 
-# cords_list =[]
-# #horz loop
-# for i in range(10):
-#     # vert loop
-#     for j in range(10):
-#         long = tl[1] + (horz_dist/10)*i
-#         lat = tl[0] - (vert_dist/10)*j
-#         coord = (lat,long)
-#         cords_list.append(coord)
+cords_list =[]
+#horz loop
+for i in range(10):
+    # vert loop
+    for j in range(10):
+        long = tl[1] + (horz_dist/10)*i
+        lat = tl[0] - (vert_dist/10)*j
+        coord = (lat,long)
+        cords_list.append(coord)
         
 
-# # query the places api for restaurant listings in grid
-# total_data = {"results":[]}
-# for cord in cords_list:
+# query the places api for restaurant listings in grid
+total_data = {"results":[]}
+for cord in cords_list:
 
-#     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={},{}&radius=750&type=restaurant&key=AIzaSyAO6eiPgJ5nvslGJcv8fQ9wfE5qrvEg-Uo".format(cord[0],cord[1])
-#     payload={}
-#     headers = {}
+    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={},{}&radius=750&type=restaurant&key=AIzaSyAO6eiPgJ5nvslGJcv8fQ9wfE5qrvEg-Uo".format(cord[0],cord[1])
+    payload={}
+    headers = {}
     
-#     response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload)
     
-#     resp_json = json.loads(response.text)
-#     total_data["results"] += resp_json["results"]
+    resp_json = json.loads(response.text)
+    total_data["results"] += resp_json["results"]
     
-# # save the raw data (at this point the data has duplicate results because)    
-# with open('complete_raw_data.json', 'w') as f:
-#     json.dump(total_data, f)
+# save the raw data (at this point the data has duplicate results because)    
+with open('complete_raw_data.json', 'w') as f:
+    json.dump(total_data, f)
     
 ##############################################################################
 
