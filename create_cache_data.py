@@ -18,6 +18,13 @@ import re
 import requests
 import json
 
+
+# read config json for api key
+with open('sample_config.json', 'r') as f:
+    config = json.load(f)
+
+api_key = config["google_api_key"]
+
 # four co-ords for annarbor border: topleft, topright, bottomleft, bottomright
 tl = (42.31672728454659, -83.80731873113874)
 tr = (42.31672728454659, -83.67290787670282)
@@ -45,7 +52,7 @@ for i in range(10):
 total_data = {"results":[]}
 for cord in cords_list:
 
-    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={},{}&radius=750&type=restaurant&key=AIzaSyAO6eiPgJ5nvslGJcv8fQ9wfE5qrvEg-Uo".format(cord[0],cord[1])
+    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={},{}&radius=750&type=restaurant&key={}".format(cord[0],cord[1],api_key)
     payload={}
     headers = {}
     
@@ -92,7 +99,7 @@ def word_process(review_text):
 # function to query Places Details API for reviews and working hours using 
 # placeid
 def get_reviews_hours(place_id, name):
-    url = "https://maps.googleapis.com/maps/api/place/details/json?place_id={}&fields=editorial_summary,reviews,opening_hours&key=AIzaSyAO6eiPgJ5nvslGJcv8fQ9wfE5qrvEg-Uo".format(place_id)
+    url = "https://maps.googleapis.com/maps/api/place/details/json?place_id={}&fields=editorial_summary,reviews,opening_hours&key={}".format(place_id,api_key)
     
     payload={}
     headers = {}
