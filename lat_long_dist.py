@@ -9,6 +9,7 @@ of the Earth using their latitude co-ordinates.
 """
 
 from math import radians, cos, sin, asin, sqrt
+
 def distance(lat1, lat2, lon1, lon2):
      
     # The math module contains a function named
@@ -33,6 +34,7 @@ def distance(lat1, lat2, lon1, lon2):
      
      
 if __name__ == "__main__":
+    # sample for trial
     lat1 = 53.32055555555556
     lat2 = 53.31861111111111
     lon1 = -1.7297222222222221

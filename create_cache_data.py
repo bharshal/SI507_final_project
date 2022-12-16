@@ -8,11 +8,14 @@
 lat-long cordinates, keep only the unique values, then query the detailed API 
 for more information ion those listings, keep relevant information, discard the
 rest and save data as cache in json format.
+
+@Note: There is no single function in this code hence instead of docstring 
+single line comments are written at appropriate places 
 """
 
 import sys
 
-#sys.path.append("C:/Users/hbora/Downloads/SI_507/final_project/code/")
+#sys.path.append("C:/Users/hbora/SI_507/final_project/code/")
 
 import re
 import requests
